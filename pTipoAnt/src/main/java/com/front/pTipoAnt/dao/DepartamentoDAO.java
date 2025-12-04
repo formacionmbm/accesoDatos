@@ -1,4 +1,4 @@
-package com.front.pTipoAnt.dao;
+package com.front.pTipoAnt.dao;   //ésta es la clase de negocio
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,6 +14,7 @@ import com.front.pTipoAnt.common.exceptions.DAOException;
 import com.front.pTipoAnt.common.exceptions.TipoException;
 import com.front.pTipoAnt.dao.interfaces.IDAO;
 import com.front.pTipoAnt.data.Departamento;
+import com.front.pTipoAnt.data.Region;
 
 public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
@@ -31,7 +32,7 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 	}
 
 	@Override
-	public List<Departamento> findAll() throws DAOException {
+	public List<Departamento> findAll() throws DAOException { //excepción checked
 		log.debug("findAll");
 
 		Connection con;
@@ -60,9 +61,9 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 		} catch (SQLException sqle) {
 			log.error(sqle.getMessage(), sqle);
-			throw new DAOException(TipoException.EXCEPCION_SQL);
+			throw new DAOException(TipoException.EXCEPCION_SQL);   //va a ser hija de IOexception (entrada y salida)
 
-		} catch (Exception e) {
+		} catch (Exception e) {  //excepción genérica
 			log.error(e.getMessage(), e);
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
@@ -256,6 +257,12 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 
+	}
+
+	@Override
+	public void update1(Region item) throws DAOException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

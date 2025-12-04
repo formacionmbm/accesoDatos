@@ -5,7 +5,7 @@ package com.front.pTipoAnt.data;
  * @author MARIA
  *
  */
-public class Departamento {
+public class Departamento { //atributo privado con constructor por defecto
 	private Long id;
 	private String nombre;
 	private Integer idManager;

@@ -3,6 +3,7 @@ package com.front.pTipoAnt.dao.interfaces;
 import java.util.List;
 
 import com.front.pTipoAnt.common.exceptions.DAOException;
+import com.front.pTipoAnt.data.Region;
 
 /**
  * Interfaz que provee  CRUD para BBDD
@@ -22,5 +23,7 @@ public interface IDAO<K,T> {
 	void update(T item) throws DAOException;
 
 	void delete(K key) throws DAOException;
+
+	void update1(Region item) throws DAOException;
 
 }

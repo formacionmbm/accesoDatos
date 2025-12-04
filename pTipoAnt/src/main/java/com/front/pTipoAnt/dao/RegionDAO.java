@@ -143,7 +143,7 @@ public class RegionDAO implements IDAO<Long, Region> {
 
 			int i = pstm.executeUpdate();
 
-			if (i == 0) {
+			if (i == 1) {
 				log.info("Elemento creado:");
 			} else {
 				log.error(TipoException.ELEMENTO_NO_CREADO.getMensaje());
