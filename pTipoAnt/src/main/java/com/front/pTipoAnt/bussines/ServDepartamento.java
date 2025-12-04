@@ -31,8 +31,10 @@ public class ServDepartamento implements IServicio<Long,Departamento>{
 		try {
 			return this.iDao.findAll();
 		} catch (DAOException daoe) {
+			log.error(daoe.getMessage(),daoe);
 			throw new ServicioException(daoe);
 		}catch (Exception e) {
+			log.error(e.getMessage(),e);
 			throw new ServicioException(TipoException.EXCEPCION_GENERAL);
 		}
 	}
@@ -44,8 +46,10 @@ public class ServDepartamento implements IServicio<Long,Departamento>{
 		try {
 			return this.iDao.findOne(key);
 		} catch (DAOException daoe) {
+			log.error(daoe.getMessage(),daoe);
 			throw new ServicioException(daoe);
 		}catch (Exception e) {
+			log.error(e.getMessage(),e);
 			throw new ServicioException(TipoException.EXCEPCION_GENERAL);
 		}
 	}
@@ -59,8 +63,10 @@ public class ServDepartamento implements IServicio<Long,Departamento>{
 		try {
 			this.iDao.create(item);
 		}catch(DAOException daoe ) {
+			log.error(daoe.getMessage(),daoe);
 			throw new ServicioException(daoe);
 		}catch(Exception e) {
+			log.error(e.getMessage(),e);
 			throw new ServicioException(TipoException.EXCEPCION_GENERAL);
 		}
 	}
@@ -72,8 +78,10 @@ public class ServDepartamento implements IServicio<Long,Departamento>{
 		try {
 			this.iDao.update(item);
 		} catch (DAOException daoe) {
+			log.error(daoe.getMessage(),daoe);
 			throw new ServicioException(daoe);
 		}catch (Exception e) {
+			log.error(e.getMessage(),e);
 			throw new ServicioException(TipoException.EXCEPCION_GENERAL);
 		}
 	}
@@ -85,8 +93,10 @@ public class ServDepartamento implements IServicio<Long,Departamento>{
 		try {
 			this.iDao.delete(key);
 		} catch (DAOException daoe) {
+			log.error(daoe.getMessage(),daoe);
 			throw new ServicioException(daoe);
 		}catch (Exception e) {
+			log.error(e.getMessage(),e);
 			throw new ServicioException(TipoException.EXCEPCION_GENERAL);
 		}
 	}
