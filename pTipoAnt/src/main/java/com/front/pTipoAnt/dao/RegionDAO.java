@@ -83,8 +83,6 @@ public class RegionDAO implements IDAO<Long, Region>{
 
 		// log.info(sql);
 		try {
-			Object i = 42;
-			String s = (String) i;
 
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
@@ -143,7 +141,7 @@ public class RegionDAO implements IDAO<Long, Region>{
 
 			int i = pstm.executeUpdate();
 
-			if (i == 0) {
+			if (i == 1) {
 				log.info("Elemento creado:");
 			} else {
 				log.error(TipoException.ELEMENTO_NO_CREADO.getMensaje());
