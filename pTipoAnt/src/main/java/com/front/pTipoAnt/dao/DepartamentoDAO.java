@@ -70,10 +70,9 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 	}
 
 	@Override
-	public Departamento findOne(Long id) throws DAOException, ArrayIndexOutOfBoundsException, NullPointerException,
-			ArithmeticException, IllegalArgumentException {
-		// log.debug("findOne");
-		// log.info("id:"+id);
+	public Departamento findOne(Long id) throws DAOException {
+		 log.debug("findOne");
+		 log.info("id:"+id);
 
 		Connection con;
 		PreparedStatement pstm;
@@ -83,11 +82,8 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 		String sql = "SELECT DEPARTMENT_ID, DEPARTMENT_NAME, MANAGER_ID, LOCATION_ID FROM DEPARTMENTS WHERE DEPARTMENT_ID =?";
 
-		// log.info(sql);
+		
 		try {
-			Object i = 42;
-			String s = (String) i;
-
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
 			pstm.setLong(1, id);
@@ -100,7 +96,7 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 				departamento.setIdDireccion(rs.getLong("LOCATION_ID"));
 				departamento.setIdManager(rs.getInt("MANAGER_ID"));
 			} else {
-				// log.error(TipoException.ELEMENTO_NO_ENCONTRADO.getMensaje());
+				log.error(TipoException.ELEMENTO_NO_ENCONTRADO.getMensaje());
 				throw new DAOException(TipoException.ELEMENTO_NO_ENCONTRADO);
 			}
 			if (rs.next()) {
@@ -112,27 +108,22 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 			con.close();
 
 		} catch (SQLException sqle) {
-			// log.error(sqle.getMessage(),sqle);
+			 log.error(sqle.getMessage(),sqle);
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
-			// System.out.println("Nuestro objeto excepcion:"+daoe);
 			throw daoe;
-
-		} catch (ClassCastException e) {
-			System.out.println("Se ha producido un error de conversion de tipos");
-			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		} catch (Exception e) {
-			// log.error(e.getMessage(),e);
+			log.error(e.getMessage(),e);
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 		return departamento;
 	}
 
 	@Override
-	public void create(Departamento item) throws DAOException {
-		// TODO Auto-generated method stub
-		log.debug("Create");
+	public void create(Departamento departamento) throws DAOException {
+		log.info("create");
+		log.debug("[departamento:"+departamento+"]");
 
 		Connection con;
 		PreparedStatement pstm;
@@ -142,10 +133,10 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 		try {
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
-			pstm.setLong(1, item.getId());
-			pstm.setString(2, item.getNombre());
-			pstm.setLong(3, item.getIdDireccion());
-			pstm.setInt(4, item.getIdManager());
+			pstm.setLong(1, departamento.getId());
+			pstm.setString(2, departamento.getNombre());
+			pstm.setLong(3, departamento.getIdDireccion());
+			pstm.setInt(4, departamento.getIdManager());
 
 			int i = pstm.executeUpdate();
 
