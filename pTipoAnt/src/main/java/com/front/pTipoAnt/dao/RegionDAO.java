@@ -84,8 +84,8 @@ public class RegionDAO implements IDAO<Long, Region> {
 
 		// log.info(sql);
 		try {
-			Object i = 42;
-			String s = (String) i;
+			//Object i = 42;
+			//String s = (String) i;
 
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
