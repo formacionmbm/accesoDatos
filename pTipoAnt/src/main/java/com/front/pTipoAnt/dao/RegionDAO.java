@@ -71,6 +71,8 @@ public class RegionDAO implements IDAO<Long, Region> {
 	public Region findOne(Long id) throws DAOException, ArrayIndexOutOfBoundsException, NullPointerException,
 	ArithmeticException, IllegalArgumentException {
 		// TODO Auto-generated method stub
+		 log.debug("findOne");
+		 log.info("id:"+id);
 		
 		Connection con;
 		PreparedStatement pstm;
@@ -81,10 +83,7 @@ public class RegionDAO implements IDAO<Long, Region> {
 		String sql = "SELECT REGION_ID, REGION_NAME FROM REGIONS WHERE REGION_ID =?";
 
 		
-		try {
-			Object i = 42;
-			String s = (String) i;
-
+		try {// aca se elimina lo que no entendia
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
 			pstm.setLong(1, id);
@@ -96,7 +95,7 @@ public class RegionDAO implements IDAO<Long, Region> {
 				region.setNombre(rs.getString("REGION_NAME"));
 				
 			} else {
-				// log.error(TipoException.ELEMENTO_NO_ENCONTRADO.getMensaje());
+				log.error(TipoException.ELEMENTO_NO_ENCONTRADO.getMensaje());
 				throw new DAOException(TipoException.ELEMENTO_NO_ENCONTRADO);
 			}
 			if (rs.next()) {
@@ -108,18 +107,15 @@ public class RegionDAO implements IDAO<Long, Region> {
 			con.close();
 
 		} catch (SQLException sqle) {
-			// log.error(sqle.getMessage(),sqle);
+			log.error(sqle.getMessage(),sqle);
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
-			// System.out.println("Nuestro objeto excepcion:"+daoe);
+			System.out.println("Nuestro objeto excepcion:"+daoe);
 			throw daoe;
 
-		} catch (ClassCastException e) {
-			System.out.println("Se ha producido un error de conversion de tipos");
-			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		} catch (Exception e) {
-			// log.error(e.getMessage(),e);
+			log.error(e.getMessage(),e);
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 		return region;
@@ -143,7 +139,7 @@ public class RegionDAO implements IDAO<Long, Region> {
 
 			int i = pstm.executeUpdate();
 
-			if (i == 0) {
+			if (i == 1) { // esto era lo que fallaba
 				log.info("Elemento creado:");
 			} else {
 				log.error(TipoException.ELEMENTO_NO_CREADO.getMensaje());
