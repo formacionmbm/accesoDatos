@@ -38,7 +38,7 @@ public class RegionDAO implements IDAO<Long, Region> {
 		Statement stm;
 		ResultSet rs;
 
-		List<Region> departamentos = new ArrayList<Region>();
+		List<Region> regions = new ArrayList<Region>();
 
 		String sql = "SELECT REGION_ID,REGION_NAME, FROM REGIONS ORDER BY REGION_ID";
 
