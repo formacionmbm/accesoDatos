@@ -33,9 +33,9 @@ public class RegionDAO implements IDAO<Long, Region>{
 	public List<Region> findAll() throws DAOException {
 		log.debug("findAll");
 
-		Connection con;
-		Statement stm;
-		ResultSet rs;
+		Connection con; //Conexion a la base de datos
+		Statement stm; //Donde se ejecuta la consulta recogiendola de la variable String sql
+		ResultSet rs; //Donde se almacena el resultado de la consulta
 
 		List<Region> regiones = new ArrayList<Region>();
 
@@ -79,9 +79,6 @@ public class RegionDAO implements IDAO<Long, Region>{
 		String sql = "SELECT REGION_ID, REGION_NAME FROM REGIONS WHERE REGION_ID =?";
 
 		try {
-			//Object i = 42;
-			//String s = (String) i;
-
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
 			pstm.setLong(1, id);
