@@ -18,6 +18,91 @@
 *.ear
 hs_err_pid*
 
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# IntelliJ project files
+out/
+.idea_modules/
+
+# IntelliJ workspace files
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/dictionaries
+.idea/**/shelf/
+
+# Data source local files
+.idea/dataSources/
+.idea/dataSources.local.xml
+
+# IntelliJ generated files
+*.iml
+*.ipr
+*.iws
+
+# Avoid sensitive info
+.idea/**/deployment.xml
+.idea/**/webServers.xml
+
+### Maven ###
+# Target directory
+target/
+
+# Maven release plugin files
+release.properties
+dependency-reduced-pom.xml
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/MavenWrapperDownloader.java
+
+### Logs ###
+*.log
+
+### OS files ###
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+
+# Virtual machine crash logs
+hs_err_pid*
+replay_pid*
+
+### Tomcat local configs (no subirlos) ###
+**/tomcat/**
+
+### JetBrains additional ###
+# Sonarlint
+.idea/sonarlint/
+
+# Plugin-generated
+.idea/**/modules.xml
+.idea/**/uloader.xml
+.idea/**/uiDesigner.xml
+
+### Extra opcional ###
+# Ignore local env files
+.env
+*.local
+
+
 ############################
 # Maven
 ############################

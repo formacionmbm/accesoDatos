@@ -23,12 +23,33 @@
 			<artifactId>ojdbc8</artifactId>
 			<version>19.7.0.0</version>
 		</dependency>
-
-
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.opoo.maven</groupId>
+            <artifactId>tomcat9-maven-plugin</artifactId>
+            <version>3.0.1</version>
+        </dependency>
 	</dependencies>
 	<build>
-		<testSourceDirectory>src/test</testSourceDirectory>
+<!--		<testSourceDirectory>src/test</testSourceDirectory>-->
 		<plugins>
+            <plugin>
+                <groupId>org.opoo.maven</groupId>
+                <artifactId>tomcat9-maven-plugin</artifactId>
+                <version>3.0.1</version>
+
+                <configuration>
+                    <url>http://localhost:8080/manager/text</url>
+                    <username>admin</username>       <!-- Aquí -->
+                    <password>admin</password>       <!-- Aquí -->
+                    <path>/miappkk</path>
+                </configuration>
+            </plugin>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.0</version>
