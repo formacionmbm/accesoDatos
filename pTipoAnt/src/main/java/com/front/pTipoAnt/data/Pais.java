@@ -8,15 +8,16 @@ import java.util.Objects;
  *
  */
 public class Pais {
-	private Long id;
+	private String id;
 	private String nombre;
+	private 
 
 	
 	public Pais() {
 		super();
 	}
 
-	public Pais(Long id, String nombre) {
+	public Pais(String id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
