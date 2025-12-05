@@ -1,5 +1,6 @@
 package com.front.pTipoAnt.data;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
@@ -8,25 +9,26 @@ import java.util.Objects;
  *
  */
 
-public class Region {
-	private Long id;
+@SuppressWarnings("serial")
+public class Region implements Serializable{
+	private int id;
 	private String nombre;
 	
 	public Region() {
 		super();
 	}
 
-	public Region(Long id, String nombre) {
+	public Region(int id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -41,11 +43,6 @@ public class Region {
 	@Override
 	public String toString() {
 		return "Region [id=" + id + ", nombre=" + nombre + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, nombre);
 	}
 
 	@Override
