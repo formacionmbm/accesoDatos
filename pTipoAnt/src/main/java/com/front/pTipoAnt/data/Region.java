@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * Bean Region
- * @author MAURO
+ * @author DANI
  *
  */
 
