@@ -21,7 +21,7 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 	private static final Logger log = Logger.getLogger(DepartamentoDAO.class);
 
-	public DepartamentoDAO() {
+	public DepartamentoDAO() { //constructor
 
 		this.driverManager = DriverManagerOracle.getInstancia();
 	}
@@ -31,7 +31,7 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 	}
 
 	@Override
-	public List<Departamento> findAll() throws DAOException {
+	public List<Departamento> findAll() throws DAOException { //Select all
 		log.debug("findAll");
 
 		Connection con;
