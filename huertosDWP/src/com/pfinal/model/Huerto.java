@@ -1,8 +1,19 @@
 package com.pfinal.model;
 
+
+
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -19,15 +30,14 @@ public class Huerto implements Serializable {
 	private long id;
 
 	private String nombre;
-
-	//bi-directional many-to-one association to Vivero
+	
 	@ManyToOne
-	@JoinColumn(name="IDVIVERO")
+	@JoinColumn(name="IDVIVERO",referencedColumnName = "ID")
 	private Vivero vivero;
-
-	//bi-directional many-to-one association to Maceta
-	@OneToMany(mappedBy="huerto")
-	private List<Maceta> macetas;
+//
+//	//bi-directional many-to-one association to Maceta
+//	@OneToMany(mappedBy="huerto")
+//	private List<Maceta> macetas;
 
 	public Huerto() {
 	}
