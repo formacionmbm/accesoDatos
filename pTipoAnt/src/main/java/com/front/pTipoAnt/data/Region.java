@@ -1,12 +1,7 @@
 package com.front.pTipoAnt.data;
 
-/**
- * Bean Departamento
- * @author MARIA
- *
- */
-public class Region {
-	private Long id;
+public class Region implements Serializable{
+	private int id;
 	private String nombre;
 	
 	
@@ -14,18 +9,18 @@ public class Region {
 		super();
 	}
 
-	public Region(Long id, String nombre) {
+	public Region(int id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
