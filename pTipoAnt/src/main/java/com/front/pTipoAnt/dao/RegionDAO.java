@@ -8,18 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.front.pTipoAnt.common.exceptions.DAOException;
 import com.front.pTipoAnt.common.exceptions.TipoException;
 import com.front.pTipoAnt.dao.interfaces.IDAO;
 import com.front.pTipoAnt.data.Region;
 
-public class RegionDAO implements IDAO<Long, Region>{
+public class RegionDAO implements IDAO<Integer, Region>{
 	
 	DriverManagerOracle driverManager;
-
-	private static final Logger log = Logger.getLogger(RegionDAO.class);
 
 	public RegionDAO() {
 
@@ -27,12 +23,12 @@ public class RegionDAO implements IDAO<Long, Region>{
 	}
 
 	public Connection getConection() {
+		
 		return DriverManagerOracle.getInstancia().getConexion();
 	}
 	
 	@Override
 	public List<Region> findAll() throws DAOException {
-		log.debug("findAll");
 
 		Connection con;
 		Statement stm;
@@ -40,7 +36,7 @@ public class RegionDAO implements IDAO<Long, Region>{
 
 		List<Region> regiones = new ArrayList<Region>();
 
-		String sql = "SELECT REGION_ID, REGION_NAME FROM REGIONS ORDER BY REGION_ID";
+		String sql = "SELECT REGION_ID, REGION_NAME FROM REGIONS";
 
 		try {
 			con = driverManager.getConexion();
@@ -49,29 +45,30 @@ public class RegionDAO implements IDAO<Long, Region>{
 
 			while (rs.next()) {
 				Region region = new Region();
-				region.setId(rs.getLong("REGION_ID"));
+				region.setId(rs.getInt("REGION_ID"));
 				region.setNombre(rs.getString("REGION_NAME"));
 				regiones.add(region);
 			}
+			
+//			rs.close();
+//			stm.close();
+//			con.close();		
 
 			return regiones;
 
 		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 
 	}
 	
 	@Override
-	public Region findOne(Long id) throws DAOException, ArrayIndexOutOfBoundsException, NullPointerException,
-			ArithmeticException, IllegalArgumentException {
-		// log.debug("findOne");
-		// log.info("id:"+id);
+	public Region findOne(Integer id) throws DAOException {
 
 		Connection con;
 		PreparedStatement pstm;
@@ -81,26 +78,23 @@ public class RegionDAO implements IDAO<Long, Region>{
 
 		String sql = "SELECT REGION_ID, REGIONS_NAME FROM REGIONS WHERE REGION_ID =?";
 
-		// log.info(sql);
 		try {
-			Object i = 42;
-			String s = (String) i;
 
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
-			pstm.setLong(1, id);
+			pstm.setInt(1, id);
 			rs = pstm.executeQuery();
 
-			if (rs.next()) {
+			if (rs.next()) {  //devuelve true si hay registro encontrado en la query
 				region = new Region();
-				region.setId(rs.getLong("REGION_ID"));
+				region.setId(rs.getInt("REGION_ID"));
 				region.setNombre(rs.getString("REGIONS_NAME"));
 			} else {
-				// log.error(TipoException.ELEMENTO_NO_ENCONTRADO.getMensaje());
-				throw new DAOException(TipoException.ELEMENTO_NO_ENCONTRADO);
+			// lanzamos nosotros la excepcion si no encuentra ningun registro con el id pasado como parametro
+				throw new DAOException(TipoException.ELEMENTO_NO_ENCONTRADO); // a la linea 110 "throw daoe"
 			}
 			if (rs.next()) {
-				log.fatal(TipoException.ELEMENTO_DUPLICADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_DUPLICADO);
 			}
 			rs.close();
@@ -108,18 +102,18 @@ public class RegionDAO implements IDAO<Long, Region>{
 			con.close();
 
 		} catch (SQLException sqle) {
-			// log.error(sqle.getMessage(),sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
-			// System.out.println("Nuestro objeto excepcion:"+daoe);
+
 			throw daoe;
 
 		} catch (ClassCastException e) {
 			System.out.println("Se ha producido un error de conversion de tipos");
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		} catch (Exception e) {
-			// log.error(e.getMessage(),e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 		return region;
@@ -128,25 +122,22 @@ public class RegionDAO implements IDAO<Long, Region>{
 	@Override
 	public void create(Region item) throws DAOException {
 		// TODO Auto-generated method stub
-		log.debug("Create");
+
 
 		Connection con;
 		PreparedStatement pstm;
 
-		String sql = "INSERT INTO REGIONS (REGION_ID,REGION_NAME) VALUES(?,?,?,?)";
+		String sql = "INSERT INTO REGIONS (REGION_ID,REGION_NAME) VALUES(?,?)";
 
 		try {
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
-			pstm.setLong(1, item.getId());
+			pstm.setInt(1, item.getId());
 			pstm.setString(2, item.getNombre());
 
 			int i = pstm.executeUpdate();
 
 			if (i == 0) {
-				log.info("Elemento creado:");
-			} else {
-				log.error(TipoException.ELEMENTO_NO_CREADO.getMensaje());
 				throw new DAOException(TipoException.ELEMENTO_NO_CREADO);
 			}
 
@@ -154,14 +145,15 @@ public class RegionDAO implements IDAO<Long, Region>{
 			con.close();
 
 		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
-			log.error(daoe.getMessage(), daoe);
-			throw new DAOException(daoe.getTipoExcepcion());
+
+			throw daoe;
+			
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 
@@ -169,7 +161,7 @@ public class RegionDAO implements IDAO<Long, Region>{
 	
 	@Override
 	public void update(Region item) throws DAOException {
-		log.debug("update");
+
 
 		Connection con;
 		PreparedStatement pstm;
@@ -179,39 +171,42 @@ public class RegionDAO implements IDAO<Long, Region>{
 		try {
 			con = driverManager.getConexion();
 			pstm = con.prepareStatement(sql);
-			pstm.setString(1, item.getNombre());
-			pstm.setLong(4, item.getId());
+			pstm.setString(1, item.getNombre()); // la primera ? REGION_NAME
+			pstm.setInt(2, item.getId()); // la segunda ? REGION_ID
 
 			int i = pstm.executeUpdate();
 
 			if (i == 0) {
-				log.error(TipoException.ELEMENTO_NO_ACTUALIZADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_NO_ACTUALIZADO);
+				
 			} else if (i > 1) {
-				log.error(TipoException.ELEMENTO_DUPLICADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_DUPLICADO);
 			}
 
+			//con.commit();
 			pstm.close();
 			con.close();
 
 		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+			//con.rollback();
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
+			//con.rollback();
 			throw daoe;
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			//con.rollback();
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 
 	}
 	
 	@Override
-	public void delete(Long key) throws DAOException {
-		log.debug("delete");
+	public void delete(Integer key) throws DAOException {
+
 
 		Connection con;
 		PreparedStatement pstm;
@@ -222,14 +217,14 @@ public class RegionDAO implements IDAO<Long, Region>{
 
 		try {
 			pstm = con.prepareStatement(sql);
-			pstm.setLong(1, key);
+			pstm.setInt(1, key);
 			int i = pstm.executeUpdate();
 
 			if (i == 0) {
-				log.error(TipoException.ELEMENTO_NO_ELIMINADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_NO_ELIMINADO);
 			} else if (i > 1) {
-				log.error(TipoException.ELEMENTO_DUPLICADO.getMensaje());
+
 				con.rollback();
 				throw new DAOException(TipoException.ELEMENTO_DUPLICADO);
 			}
@@ -237,14 +232,14 @@ public class RegionDAO implements IDAO<Long, Region>{
 			con.close();
 
 		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
 			throw daoe;
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 

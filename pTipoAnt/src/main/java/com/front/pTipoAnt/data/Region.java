@@ -6,24 +6,24 @@ package com.front.pTipoAnt.data;
  *
  */
 public class Region {
-	private Long id;
+	private Integer id;
 	private String nombre;
 	
 	public Region() {
 		super();
 	}
 
-	public Region(Long id, String nombre) {
+	public Region(Integer id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
