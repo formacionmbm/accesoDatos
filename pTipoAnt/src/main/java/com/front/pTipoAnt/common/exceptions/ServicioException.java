@@ -1,20 +1,14 @@
 package com.front.pTipoAnt.common.exceptions;
 
-
-
-import org.apache.log4j.Logger;
-
-import com.front.pTipoAnt.bussines.ServDepartamento;
-
 @SuppressWarnings("serial")
 public class ServicioException extends Exception {
 	TipoException tipoExcepcion;
 
-	private static final Logger log = Logger.getLogger(ServDepartamento.class);
+
 
 	public ServicioException(TipoException tipoExcepcion) {
 		super();
-		log.error(tipoExcepcion.getMensaje());
+
 		this.tipoExcepcion = tipoExcepcion;
 	}
 
@@ -38,7 +32,7 @@ public class ServicioException extends Exception {
 			this.tipoExcepcion= TipoException.EXCEPCION_DAO;
 			break;
 		}
-		log.error(this.tipoExcepcion.getMensaje());
+
 
 	}
 

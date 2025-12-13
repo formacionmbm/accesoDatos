@@ -8,8 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.front.pTipoAnt.common.exceptions.DAOException;
 import com.front.pTipoAnt.common.exceptions.TipoException;
 import com.front.pTipoAnt.dao.interfaces.IDAO;
@@ -19,7 +17,6 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 	DriverManagerOracle driverManager;
 
-	private static final Logger log = Logger.getLogger(DepartamentoDAO.class);
 
 	public DepartamentoDAO() {
 
@@ -32,7 +29,6 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 	@Override
 	public List<Departamento> findAll() throws DAOException {
-		log.debug("findAll");
 
 		Connection con;
 		Statement stm;
@@ -59,11 +55,11 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 			return departamentos;
 
 		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 
@@ -71,8 +67,6 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 	@Override
 	public Departamento findOne(Long id) throws DAOException {
-		 log.debug("findOne");
-		 log.info("id:"+id);
 
 		Connection con;
 		PreparedStatement pstm;
@@ -96,11 +90,11 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 				departamento.setIdDireccion(rs.getLong("LOCATION_ID"));
 				departamento.setIdManager(rs.getInt("MANAGER_ID"));
 			} else {
-				log.error(TipoException.ELEMENTO_NO_ENCONTRADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_NO_ENCONTRADO);
 			}
 			if (rs.next()) {
-				log.fatal(TipoException.ELEMENTO_DUPLICADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_DUPLICADO);
 			}
 			rs.close();
@@ -108,13 +102,13 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 			con.close();
 
 		} catch (SQLException sqle) {
-			 log.error(sqle.getMessage(),sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
 			throw daoe;
 		} catch (Exception e) {
-			log.error(e.getMessage(),e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 		return departamento;
@@ -122,8 +116,6 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 	@Override
 	public void create(Departamento departamento) throws DAOException {
-		log.info("create");
-		log.debug("[departamento:"+departamento+"]");
 
 		Connection con;
 		PreparedStatement pstm;
@@ -140,25 +132,22 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 			int i = pstm.executeUpdate();
 
-			if (i == 1) {
-				log.info("Elemento creado:");
-			} else {
-				log.error(TipoException.ELEMENTO_NO_CREADO.getMensaje());
+			if (i == 0) {
 				throw new DAOException(TipoException.ELEMENTO_NO_CREADO);
-			}
+			} 
 
 			pstm.close();
 			con.close();
 
 		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
-			log.error(daoe.getMessage(), daoe);
+
 			throw new DAOException(daoe.getTipoExcepcion());
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 
@@ -166,7 +155,6 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 	@Override
 	public void update(Departamento item) throws DAOException {
-		log.debug("update");
 
 		Connection con;
 		PreparedStatement pstm;
@@ -184,10 +172,10 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 			int i = pstm.executeUpdate();
 
 			if (i == 0) {
-				log.error(TipoException.ELEMENTO_NO_ACTUALIZADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_NO_ACTUALIZADO);
 			} else if (i > 1) {
-				log.error(TipoException.ELEMENTO_DUPLICADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_DUPLICADO);
 			}
 
@@ -195,14 +183,14 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 			con.close();
 
 		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
 			throw daoe;
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 
@@ -210,7 +198,7 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 
 	@Override
 	public void delete(Long key) throws DAOException {
-		log.debug("delete");
+
 
 		Connection con;
 		PreparedStatement pstm;
@@ -225,25 +213,24 @@ public class DepartamentoDAO implements IDAO<Long, Departamento> {
 			int i = pstm.executeUpdate();
 
 			if (i == 0) {
-				log.error(TipoException.ELEMENTO_NO_ELIMINADO.getMensaje());
+
 				throw new DAOException(TipoException.ELEMENTO_NO_ELIMINADO);
 			} else if (i > 1) {
-				log.error(TipoException.ELEMENTO_DUPLICADO.getMensaje());
+
 				con.rollback();
 				throw new DAOException(TipoException.ELEMENTO_DUPLICADO);
 			}
 			pstm.close();
 			con.close();
 
-		} catch (SQLException sqle) {
-			log.error(sqle.getMessage(), sqle);
+
 			throw new DAOException(TipoException.EXCEPCION_SQL);
 
 		} catch (DAOException daoe) {
 			throw daoe;
 
 		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+
 			throw new DAOException(TipoException.EXCEPCION_GENERAL);
 		}
 

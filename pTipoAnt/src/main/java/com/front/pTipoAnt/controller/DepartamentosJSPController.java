@@ -1,7 +1,7 @@
 package com.front.pTipoAnt.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.lang.System.Logger;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,11 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.log4j.Logger;
-
-import com.front.pTipoAnt.bussines.ServDepartamento;
-import com.front.pTipoAnt.bussines.interfaces.IServicio;
-import com.front.pTipoAnt.common.exceptions.ServicioException;
 import com.front.pTipoAnt.data.Departamento;
 
 @SuppressWarnings("serial")
