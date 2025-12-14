@@ -1,8 +1,8 @@
-package com.accesodatos.jpa.profeJPA.dao.interfaes;
+package com.accesodatos.jpa.victhorJPA.dao.interfaes;
 
 import java.util.List;
 
-import com.accesodatos.jpa.profeJPA.common.exceptions.DAOException;
+import com.accesodatos.jpa.victhorJPA.common.exceptions.DAOException;
 
 public interface IDAO<K, T> {
 	

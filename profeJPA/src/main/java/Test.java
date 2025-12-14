@@ -2,10 +2,10 @@
 
 import java.util.List;
 
-import com.accesodatos.jpa.profeJPA.common.exceptions.DAOException;
-import com.accesodatos.jpa.profeJPA.dao.DepartamentoDAO;
-import com.accesodatos.jpa.profeJPA.dao.interfaes.IDAO;
-import com.accesodatos.jpa.profeJPA.entities.Departamento;
+import com.accesodatos.jpa.victhorJPA.common.exceptions.DAOException;
+import com.accesodatos.jpa.victhorJPA.dao.interfaes.IDAO;
+import com.accesodatos.jpa.victhorJPA.entities.Departamento;
+import com.accesodatos.jpa.victhorJPAdao.DepartamentoDAO;
 
 
 

@@ -1,4 +1,4 @@
-package com.accesodatos.jpa.profeJPA.entities;
+package com.accesodatos.jpa.victhorJPA.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

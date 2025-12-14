@@ -1,4 +1,4 @@
-package com.accesodatos.jpa.profeJPA.dao;
+package com.accesodatos.jpa.victhorJPAdao;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.accesodatos.jpa.profeJPA.common.exceptions.DAOException;
-import com.accesodatos.jpa.profeJPA.dao.interfaes.IDAO;
-import com.accesodatos.jpa.profeJPA.entities.Departamento;
+import com.accesodatos.jpa.victhorJPA.common.exceptions.DAOException;
+import com.accesodatos.jpa.victhorJPA.dao.interfaes.IDAO;
+import com.accesodatos.jpa.victhorJPA.entities.Departamento;
 
 public class DepartamentoDAO implements IDAO<Long, Departamento> {
 	EntityManagerFactory emf;
