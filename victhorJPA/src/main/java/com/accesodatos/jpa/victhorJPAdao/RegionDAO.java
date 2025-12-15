@@ -16,11 +16,6 @@ import com.accesodatos.jpa.victhorJPA.entities.Region;
 public class RegionDAO implements IDAO<Integer, Region>{
 	@PersistenceUnit(name = "UP")
 	EntityManagerFactory emf;
-	
-	public RegionDAO() {
-		
-	}
-
 
 	@Override
 	public List<Region> findAll() throws DAOException {
