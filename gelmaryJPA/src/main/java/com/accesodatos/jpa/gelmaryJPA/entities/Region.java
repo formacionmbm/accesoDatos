@@ -12,9 +12,14 @@ import javax.persistence.Table;
 @Table(name="REGIONS")
 public class Region implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="REGION_ID")
-	private long id;
+	private int id;
 	
 	@Column(name="REGION_NAME")
 	private String nombre;
@@ -23,17 +28,17 @@ public class Region implements Serializable{
 		super();
 	}
 
-	public Region(long id, String nombre) {
+	public Region(int id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
