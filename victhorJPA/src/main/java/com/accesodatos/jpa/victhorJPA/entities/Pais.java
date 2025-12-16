@@ -3,6 +3,8 @@ package com.accesodatos.jpa.victhorJPA.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,8 +16,10 @@ public class Pais {
 	private int id;
 	@Column (name = "COUNTRY_NAME")
 	private String nombre;
-	@Column (name = "REGION_ID")
-	private int idRegion;
+	
+	@ManyToOne
+	@JoinColumn (name = "REGION_ID")
+	private Region region;
 	
 	// Constructor por defecto
 	public Pais() {
@@ -39,18 +43,18 @@ public class Pais {
 		this.nombre = nombre;
 	}
 
-	public int getIdRegion() {
-		return idRegion;
+	public Region getRegion() {
+		return region;
 	}
 
-	public void setIdRegion(int idRegion) {
-		this.idRegion = idRegion;
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 
 	@Override
 	public String toString() {
-		return "Pais [id=" + id + ", nombre=" + nombre + ", idRegion=" + idRegion + "]";
+		return "Pais [id=" + id + ", nombre=" + nombre + ", region=" + region + "]";
 	}
-	
+
 	
 }

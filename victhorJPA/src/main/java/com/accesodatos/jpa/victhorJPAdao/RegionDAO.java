@@ -17,12 +17,19 @@ public class RegionDAO implements IDAO<Integer, Region>{
 	@PersistenceUnit(name = "UP")
 	EntityManagerFactory emf;
 
+	
+	
+	public RegionDAO() {
+		this.emf=Persistence.createEntityManagerFactory("UP");
+	}
+
+
 	@Override
 	public List<Region> findAll() throws DAOException {
 		List<Region> list;
 		EntityManager em;
 		try {
-			EntityManagerFactory emf=Persistence.createEntityManagerFactory("UP");
+			
 			em=emf.createEntityManager();
 			list= em.createQuery("select r from Region r",Region.class).getResultList();
 			return list;
@@ -37,7 +44,7 @@ public class RegionDAO implements IDAO<Integer, Region>{
 	@Override
 	public Region findOne(Integer id) throws DAOException {
 		try{
-			EntityManagerFactory emf=Persistence.createEntityManagerFactory("UP");
+			
 			EntityManager em= emf.createEntityManager();
 			
 			Region region = em.find(Region.class, id);
@@ -53,7 +60,7 @@ public class RegionDAO implements IDAO<Integer, Region>{
 	public void create(Region element) throws DAOException {
 		
 		try {
-			EntityManagerFactory emf=Persistence.createEntityManagerFactory("UP");
+			
 			EntityManager em= emf.createEntityManager();
 			em.getTransaction().begin();
 			em.persist(element);
@@ -72,7 +79,7 @@ public class RegionDAO implements IDAO<Integer, Region>{
 	public void update(Region element) throws DAOException {
 		
 		try {
-			EntityManagerFactory emf=Persistence.createEntityManagerFactory("UP");
+			
 			EntityManager em= emf.createEntityManager();
 			Region region = em.find(Region.class,element.getId());
 			em.getTransaction().begin();
@@ -92,7 +99,7 @@ public class RegionDAO implements IDAO<Integer, Region>{
 	public void delete(Integer id) throws DAOException {
 		
 		try {
-			EntityManagerFactory emf=Persistence.createEntityManagerFactory("UP");
+			
 			EntityManager em= emf.createEntityManager();
 			Region region = em.find(Region.class,id);
 			em.getTransaction().begin();
