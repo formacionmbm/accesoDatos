@@ -1,4 +1,6 @@
-package com.accesodatos.jps.cesarJPA.entities;
+package com.accesodatos.jpa.cesarJPA.entities;
+
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,7 +13,7 @@ public class Region {
 	
 	@Id
 	@Column(name = "REGION_ID")
-	private long id;
+	private Long id;
 	
 	@Column(name = "REGION_NAME")
 	private String name;
@@ -21,11 +23,11 @@ public class Region {
 		// TODO Auto-generated constructor stub
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -40,6 +42,23 @@ public class Region {
 	@Override
 	public String toString() {
 		return "Region [id=" + id + ", name=" + name + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, name);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Region other = (Region) obj;
+		return id == other.id && Objects.equals(name, other.name);
 	}
 	
 	
