@@ -13,10 +13,13 @@ import com.accesodatos.jpa.victhorJPA.entities.Pais;
 
 public class PaisDAO implements IDAO<Integer,Pais>{
 
-	@PersistenceUnit
+	@PersistenceUnit(name="UP")
 	EntityManagerFactory emf;
 	
-	EntityManager em;
+	public PaisDAO() {
+		this.emf=Persistence.createEntityManagerFactory("UP");
+	}
+	
 	
 	@Override
 	public List<Pais> findAll() throws DAOException {
@@ -24,8 +27,7 @@ public class PaisDAO implements IDAO<Integer,Pais>{
 		
 		
 		try {
-			emf = Persistence.createEntityManagerFactory("UP");
-			em = emf.createEntityManager();
+			EntityManager em = emf.createEntityManager();
 			list = em.createQuery("select p from Pais p",Pais.class).getResultList();
 			return list;
 		}catch(Exception e) {
@@ -39,8 +41,8 @@ public class PaisDAO implements IDAO<Integer,Pais>{
 	public Pais findOne(Integer id) throws DAOException {
 		
 		try {
-			emf=Persistence.createEntityManagerFactory("UP");
-			em=emf.createEntityManager();
+			
+			EntityManager em=emf.createEntityManager();
 			
 			Pais pais = em.find(Pais.class, id);
 			return pais;
@@ -54,8 +56,8 @@ public class PaisDAO implements IDAO<Integer,Pais>{
 	@Override
 	public void create(Pais element) throws DAOException {
 		try {
-			emf=Persistence.createEntityManagerFactory("UP");
-			em=emf.createEntityManager();
+			
+			EntityManager em=emf.createEntityManager();
 			
 			em.getTransaction().begin();
 			em.persist(element);
@@ -70,8 +72,8 @@ public class PaisDAO implements IDAO<Integer,Pais>{
 
 	@Override
 	public void update(Pais element) throws DAOException {
-		emf=Persistence.createEntityManagerFactory("UP");
-		em=emf.createEntityManager();
+		
+		EntityManager em=emf.createEntityManager();
 		
 		Pais pais=em.find(Pais.class,element.getId());
 		
@@ -85,8 +87,8 @@ public class PaisDAO implements IDAO<Integer,Pais>{
 	@Override
 	public void delete(Integer id) throws DAOException {
 		try {
-			emf=Persistence.createEntityManagerFactory("UP");
-			em=emf.createEntityManager();
+			
+			EntityManager em=emf.createEntityManager();
 			
 			Pais pais=em.find(Pais.class, id);
 			

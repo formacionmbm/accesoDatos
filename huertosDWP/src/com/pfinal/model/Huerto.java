@@ -36,8 +36,8 @@ public class Huerto implements Serializable {
 	private Vivero vivero;
 //
 //	//bi-directional many-to-one association to Maceta
-//	@OneToMany(mappedBy="huerto")
-//	private List<Maceta> macetas;
+	@OneToMany(mappedBy="huerto")
+	private List<Maceta> macetas;
 
 	public Huerto() {
 	}

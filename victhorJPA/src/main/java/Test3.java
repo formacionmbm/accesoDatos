@@ -3,6 +3,7 @@ import java.util.List;
 import com.accesodatos.jpa.victhorJPA.common.exceptions.DAOException;
 import com.accesodatos.jpa.victhorJPA.dao.interfaes.IDAO;
 import com.accesodatos.jpa.victhorJPA.entities.Pais;
+import com.accesodatos.jpa.victhorJPA.entities.Region;
 import com.accesodatos.jpa.victhorJPAdao.PaisDAO;
 
 public class Test3 {
@@ -23,6 +24,7 @@ public class Test3 {
 		pais = new Pais();
 		pais.setId(100);
 		pais.setNombre("China");
+		pais.setRegion(null);
 
 		
 		dao.create(pais);
@@ -41,7 +43,7 @@ public class Test3 {
 		System.out.println("----- Eliminar Pais id=100 -------------------");
 		dao.delete(100);
 		
-		pais = dao.findOne(5); //guarda null en region ya que se elimina el registro
+		pais = dao.findOne(100); //guarda null en region ya que se elimina el registro
 		System.out.println(pais);
 
 	}
