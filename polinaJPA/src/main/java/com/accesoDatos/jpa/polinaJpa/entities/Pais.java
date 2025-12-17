@@ -8,30 +8,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Bean Region
+ * Bean Pais
  * 
  * @author POLINA
  *
  */
 
 @Entity
-@Table(name = "REGIONS")
-public class Region {
+@Table(name = "COUNTRIES")
+public class Pais {
 	@Id
-	@Column(name = "REGION_ID")
-	private int id;
-	@Column(name = "REGION_NAME")
+	@Column(name = "COUNTRY_ID")
+	private String id;
+	@Column(name = "COUNTRY_NAME")
 	private String nombre;
+	@Column(name = "REGION_ID")
+	private int region_id;
 
-	public Region() {
+	public Pais() {
 		super();
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -43,9 +45,18 @@ public class Region {
 		this.nombre = nombre;
 	}
 
+	public int getRegion_id() {
+		return region_id;
+	}
+
+	public void setRegion_id(int region_id) {
+		this.region_id = region_id;
+	}
+
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nombre);
+		return Objects.hash(id, nombre, region_id);
 	}
 
 	@Override
@@ -56,14 +67,18 @@ public class Region {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Region other = (Region) obj;
-		return id == other.id && Objects.equals(nombre, other.nombre);
+		Pais other = (Pais) obj;
+		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre) && region_id == other.region_id;
 	}
 
 	@Override
 	public String toString() {
-		return "Region [id=" + id + ", nombre=" + nombre + "]";
+		return "Pais [id=" + id + ", nombre=" + nombre + ", region_id=" + region_id + "]";
 	}
+
+	
+
+
 
 }
 

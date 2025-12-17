@@ -35,20 +35,31 @@ public class RegionDao implements IDAO<Integer, Region> {
 	}
 
 	@Override
-	public void create(Region item) throws DAOException {
-		// TODO Auto-generated method stub
+	public void create(Region region) throws DAOException {
+		EntityManager em = this.emf.createEntityManager(); 
+		em.getTransaction().begin();
+		em.persist(region);
+		em.getTransaction().commit();
+	}
+
+	@Override
+	public void update(Region region) throws DAOException {
+		EntityManager em = this.emf.createEntityManager(); 
+		em.getTransaction().begin();
+//		em.merge(region);
+		Region region1 = em.find(Region.class, region.getId());
+		region1.setNombre(region.getNombre());
+		em.getTransaction().commit();
 		
 	}
 
 	@Override
-	public void update(Region item) throws DAOException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(Integer key) throws DAOException {
-		// TODO Auto-generated method stub
+	public void delete(Integer id) throws DAOException {
+		EntityManager em = this.emf.createEntityManager(); 
+		em.getTransaction().begin();
+		Region region1 = em.find(Region.class, id);
+		em.remove(region1);
+		em.getTransaction().commit();
 		
 	}
 
