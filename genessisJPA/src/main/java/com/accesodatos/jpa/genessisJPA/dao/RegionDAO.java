@@ -1,4 +1,4 @@
-package com.accesodatos.jpa.profeJPA.dao;
+package com.accesodatos.jpa.genessisJPA.dao;
 //dependencias de Maven: proveedor de persistencias, diver y trazas
 
 import java.util.List;
@@ -7,11 +7,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.accesodatos.jpa.profeJPA.dao.interfaces.IDAO;
-import com.accesodatos.jpa.profeJPA.entities.Region;
-import com.accesodatos.jpa.profeJPA.exceptions.DAOException;
+import com.accesodatos.jpa.genessisJPA.common.exceptions.DAOException;
+import com.accesodatos.jpa.genessisJPA.dao.interfaces.IDAO;
+import com.accesodatos.jpa.genessisJPA.entities.Region;
 
-public class RegionDAO implements IDAO{    //IDAO: cinco métodos
+
+
+public class RegionDAO implements IDAO<Integer,Region>{    //IDAO: cinco métodos
 	
 	EntityManagerFactory emf;
 	
