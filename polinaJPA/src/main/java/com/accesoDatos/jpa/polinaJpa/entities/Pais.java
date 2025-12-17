@@ -5,7 +5,11 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+
 
 /**
  * Bean Pais
@@ -17,13 +21,16 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "COUNTRIES")
 public class Pais {
+	
 	@Id
 	@Column(name = "COUNTRY_ID")
 	private String id;
 	@Column(name = "COUNTRY_NAME")
 	private String nombre;
-	@Column(name = "REGION_ID")
-	private int region_id;
+	
+	@ManyToOne
+	@JoinColumn(name = "REGION_ID")
+	private Region region;
 
 	public Pais() {
 		super();
@@ -45,18 +52,17 @@ public class Pais {
 		this.nombre = nombre;
 	}
 
-	public int getRegion_id() {
-		return region_id;
+	public Region getRegion() {
+		return region;
 	}
 
-	public void setRegion_id(int region_id) {
-		this.region_id = region_id;
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 
-	
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, nombre, region_id);
+		return Objects.hash(id, nombre, region);
 	}
 
 	@Override
@@ -68,17 +74,19 @@ public class Pais {
 		if (getClass() != obj.getClass())
 			return false;
 		Pais other = (Pais) obj;
-		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre) && region_id == other.region_id;
+		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(region, other.region);
 	}
 
 	@Override
 	public String toString() {
-		return "Pais [id=" + id + ", nombre=" + nombre + ", region_id=" + region_id + "]";
+		return "Pais [id=" + id + ", nombre=" + nombre + ", region=" + region + "]";
 	}
+}
 
 	
 
 
 
-}
+
 
