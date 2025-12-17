@@ -9,7 +9,6 @@ import javax.persistence.PersistenceUnit;
 
 import com.accesodatos.jpa.victhorJPA.common.exceptions.DAOException;
 import com.accesodatos.jpa.victhorJPA.dao.interfaes.IDAO;
-import com.accesodatos.jpa.victhorJPA.entities.Departamento;
 import com.accesodatos.jpa.victhorJPA.entities.Region;
 
 
@@ -57,13 +56,13 @@ public class RegionDAO implements IDAO<Integer, Region>{
 
 
 	@Override
-	public void create(Region element) throws DAOException {
+	public void create(Region region) throws DAOException {
 		
 		try {
 			
 			EntityManager em= emf.createEntityManager();
 			em.getTransaction().begin();
-			em.persist(element);
+			em.persist(region);
 			em.getTransaction().commit();
 			
 		}catch(Exception e) {
@@ -83,7 +82,7 @@ public class RegionDAO implements IDAO<Integer, Region>{
 			EntityManager em= emf.createEntityManager();
 			Region region = em.find(Region.class,element.getId());
 			em.getTransaction().begin();
-			region.setNombre(element.getNombre());
+			region.setNombre(element.getNombre()); //em.merge(element);
 			em.getTransaction().commit();
 			
 		}catch(Exception e) {

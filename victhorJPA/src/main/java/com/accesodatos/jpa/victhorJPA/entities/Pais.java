@@ -1,5 +1,7 @@
 package com.accesodatos.jpa.victhorJPA.entities;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,25 +15,27 @@ public class Pais {
 	
 	@Id
 	@Column (name = "COUNTRY_ID")
-	private int id;
+	private String id;
 	@Column (name = "COUNTRY_NAME")
 	private String nombre;
 	
 	@ManyToOne
-	@JoinColumn (name = "REGION_ID")
-	private Region region;
+	@JoinColumn (name = "REGION_ID") // (name="Region_ID,nullable=true") --> esto si pudiera ser nula 
+	private Region region; 
 	
 	// Constructor por defecto
 	public Pais() {
 		super();
 	}
 
+
+
 	// Getter y Setter de los Atributos privados
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -51,10 +55,30 @@ public class Pais {
 		this.region = region;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Pais [id=" + id + ", nombre=" + nombre + ", region=" + region + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(id, nombre, region);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pais other = (Pais) obj;
+		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(region, other.region);
+	}
+	
+	
 	
 }

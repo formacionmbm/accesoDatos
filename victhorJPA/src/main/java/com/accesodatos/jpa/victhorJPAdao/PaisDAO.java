@@ -1,3 +1,4 @@
+
 package com.accesodatos.jpa.victhorJPAdao;
 
 import java.util.List;
@@ -10,8 +11,9 @@ import javax.persistence.PersistenceUnit;
 import com.accesodatos.jpa.victhorJPA.common.exceptions.DAOException;
 import com.accesodatos.jpa.victhorJPA.dao.interfaes.IDAO;
 import com.accesodatos.jpa.victhorJPA.entities.Pais;
+import com.accesodatos.jpa.victhorJPA.entities.Region;
 
-public class PaisDAO implements IDAO<Integer,Pais>{
+public class PaisDAO implements IDAO<String,Pais>{
 
 	@PersistenceUnit(name="UP")
 	EntityManagerFactory emf;
@@ -38,7 +40,7 @@ public class PaisDAO implements IDAO<Integer,Pais>{
 	}
 
 	@Override
-	public Pais findOne(Integer id) throws DAOException {
+	public Pais findOne(String id) throws DAOException {
 		
 		try {
 			
@@ -79,13 +81,15 @@ public class PaisDAO implements IDAO<Integer,Pais>{
 		
 		em.getTransaction().begin();
 		pais.setNombre(element.getNombre());
-		pais.setRegion(element.getRegion());
+		Region region = em.find(Region.class, pais.getRegion().getId());
+		pais.setRegion(region);
+		//pais.setRegion(element.getRegion());
 		em.getTransaction().commit();
 		
 	}
 
 	@Override
-	public void delete(Integer id) throws DAOException {
+	public void delete(String id) throws DAOException {
 		try {
 			
 			EntityManager em=emf.createEntityManager();

@@ -10,40 +10,42 @@ public class Test3 {
 
 	public static void main(String[] args) throws DAOException{
 		
-		IDAO<Integer,Pais> dao=new PaisDAO();
+		IDAO<String,Pais> dao=new PaisDAO();
 		System.out.println("----- Lista de Paises -------------------");
 		List<Pais> paises=dao.findAll();
 		for(Pais pais:paises) {
 			System.out.println(pais);
 		}
-		System.out.println("----- Pais id=1 -------------------");
-		Pais pais = dao.findOne(1);
+		System.out.println("----- Pais id=IT -------------------");
+		Pais pais = dao.findOne("IT");
 		System.out.println(pais);
 		
-		System.out.println("----- Crear Pais id=100 -------------------");
+		System.out.println("----- Crear Pais id=ES -------------------");
 		pais = new Pais();
-		pais.setId(100);
-		pais.setNombre("China");
-		pais.setRegion(null);
+		pais.setId("ES");
+		pais.setNombre("España");
+		pais.setRegion(new Region());
+		pais.getRegion().setId(1);
 
 		
 		dao.create(pais);
 		
 		
-		pais = dao.findOne(100);
+		pais = dao.findOne("ES");
 		System.out.println(pais);
 		
-		System.out.println("----- Modificar Pais id=100 -------------------");
-		pais.setNombre("PaisModificado");
+		System.out.println("----- Modificar Pais id=ES -------------------");
+		pais.setNombre("PaisEspañaModificado");
+		
 		dao.update(pais);
 		
-		pais = dao.findOne(100);
+		pais = dao.findOne("ES");
 		System.out.println(pais);
 		
-		System.out.println("----- Eliminar Pais id=100 -------------------");
-		dao.delete(100);
+		System.out.println("----- Eliminar Pais id=ES -------------------");
+		dao.delete("ES");
 		
-		pais = dao.findOne(100); //guarda null en region ya que se elimina el registro
+		pais = dao.findOne("ES"); //guarda null en region ya que se elimina el registro
 		System.out.println(pais);
 
 	}
