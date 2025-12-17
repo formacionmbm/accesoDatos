@@ -50,21 +50,57 @@ public class RegionDAO implements IDAO<Integer, Region>{
 	}
 
 	@Override
-	public void create(Region element) throws DAOException {
-		// TODO Auto-generated method stub
+	public void create(Region region) throws DAOException {
+		EntityManager em;
+		
+		try {
+			em=this.emf.createEntityManager();
+			em.getTransaction().begin();
+			em.persist(region); //meter el objeto en el contexto de persistencia
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			throw new DAOException();
+		}
 		
 	}
 
 	@Override
-	public void update(Region element) throws DAOException {
-		// TODO Auto-generated method stub
+	public void update(Region region) throws DAOException {
+		EntityManager em;
+		
+		try {
+			em=this.emf.createEntityManager();
+			em.getTransaction().begin();
+			//em.merge(region); //actualizar el objeto en el contexto de persistencia
+			
+			Region region1 = em.find(Region.class, region.getId());
+			region1.setNombre(region.getNombre());
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			throw new DAOException();
+		}
+		
 		
 	}
 
 	@Override
 	public void delete(Integer id) throws DAOException {
-		// TODO Auto-generated method stub
+		EntityManager em;
 		
+		try {
+			em=this.emf.createEntityManager();
+			em.getTransaction().begin();
+			//em.merge(region); //actualizar el objeto en el contexto de persistencia
+			
+			Region region1 = em.find(Region.class, id);
+			em.remove(region1);
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			throw new DAOException();
+		}
 	}
 	
 	
