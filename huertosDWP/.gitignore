@@ -1,0 +1,45 @@
+############################
+# Eclipse
+############################
+.project
+.classpath
+.settings/
+bin/
+tmp/
+
+# Archivos de workspace de Eclipse
+*.launch
+.metadata/
+recommenders/
+
+############################
+# Java
+############################
+*.class
+*.log
+
+# BlueJ
+*.ctxt
+
+# Virtual Machine crash logs
+hs_err_pid*
+replay_pid*
+
+############################
+# Maven (si usas Maven)
+############################
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+############################
+# Gradle (si usas Gradle)
+############################
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+
+#######################
