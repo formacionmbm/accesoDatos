@@ -1,8 +1,8 @@
-package com.accesoDatos.jpa.polinaJpa.dao.interfaces;
+package com.accesoDatos.jpa.fernandoJpa.dao.interfaces;
 
 import java.util.List;
 
-import com.accesoDatos.jpa.polinaJpa.exceptions.DAOException;
+import com.accesoDatos.jpa.fernandoJpa.exceptions.DAOException;
 
 /**
  * Interfaz que provee  CRUD para BBDD

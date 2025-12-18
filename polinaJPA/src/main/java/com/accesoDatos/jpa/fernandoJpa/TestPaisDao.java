@@ -1,12 +1,12 @@
-package com.accesoDatos.jpa.polinaJpa;
+package com.accesoDatos.jpa.fernandoJpa;
 
 import java.util.List;
 
-import com.accesoDatos.jpa.polinaJpa.dao.PaisDao;
-import com.accesoDatos.jpa.polinaJpa.dao.interfaces.IDAO;
-import com.accesoDatos.jpa.polinaJpa.entities.Pais;
-import com.accesoDatos.jpa.polinaJpa.entities.Region;
-import com.accesoDatos.jpa.polinaJpa.exceptions.DAOException;
+import com.accesoDatos.jpa.fernandoJpa.dao.PaisDao;
+import com.accesoDatos.jpa.fernandoJpa.dao.interfaces.IDAO;
+import com.accesoDatos.jpa.fernandoJpa.entities.Pais;
+import com.accesoDatos.jpa.fernandoJpa.entities.Region;
+import com.accesoDatos.jpa.fernandoJpa.exceptions.DAOException;
 
 public class TestPaisDao {
 

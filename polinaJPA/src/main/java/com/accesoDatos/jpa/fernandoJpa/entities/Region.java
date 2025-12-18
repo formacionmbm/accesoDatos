@@ -1,4 +1,4 @@
-package com.accesoDatos.jpa.polinaJpa.entities;
+package com.accesoDatos.jpa.fernandoJpa.entities;
 
 import java.util.Objects;
 

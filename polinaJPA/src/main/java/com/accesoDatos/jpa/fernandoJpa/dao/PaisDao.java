@@ -1,4 +1,4 @@
-package com.accesoDatos.jpa.polinaJpa.dao;
+package com.accesoDatos.jpa.fernandoJpa.dao;
 
 import java.util.List;
 
@@ -6,10 +6,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.accesoDatos.jpa.polinaJpa.dao.interfaces.IDAO;
-import com.accesoDatos.jpa.polinaJpa.entities.Pais;
-import com.accesoDatos.jpa.polinaJpa.entities.Region;
-import com.accesoDatos.jpa.polinaJpa.exceptions.DAOException;
+import com.accesoDatos.jpa.fernandoJpa.dao.interfaces.IDAO;
+import com.accesoDatos.jpa.fernandoJpa.entities.Pais;
+import com.accesoDatos.jpa.fernandoJpa.entities.Region;
+import com.accesoDatos.jpa.fernandoJpa.exceptions.DAOException;
 
 public class PaisDao implements IDAO<String, Pais> {
 
